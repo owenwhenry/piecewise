@@ -1,6 +1,6 @@
 import url from './critical.js';
 import scroll from "@threespot/freeze-scroll";
-
+/*
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibS1sYWIiLCJhIjoiY2p3eWtxOXZ4MDFkMzQ5cG95ODFhbWJieiJ9.9G1YGnkme4goR0Ly3kqovA';
@@ -9,17 +9,20 @@ const bounds = [
   [-167, 16], // Southwest coordinates
   [-46, 72] // Northeast coordinates
 ];
-
-const mapContainer = document.getElementById('Map');
+*/
+//const mapContainer = document.getElementById('Map');
 const main = document.getElementsByClassName('main')[0];
 const consentForm = document.getElementById('ConsentForm');
 const surveyForm = document.getElementById('SurveyForm');
 const results = document.getElementById('results');
 const step2 = document.getElementById('Step2');
+const step3 = document.getElementById('Step3');
+const submitAction = document.getElementById('submit-results-action');
 const background = document.getElementsByClassName('background')[0];
 
 // only create map if the survey and map container exist on the page
 // if so, build the Mapbox map
+/*
 if (!!consentForm && !!mapContainer) {
 
   let geojson;
@@ -127,7 +130,7 @@ if (!!consentForm && !!mapContainer) {
     //    console.log('off item');
     //  });
     }
-
+*/
     surveyForm.addEventListener('submit', logSubmit);
 
     function logSubmit(event) {
@@ -192,9 +195,13 @@ if (!!consentForm && !!mapContainer) {
       results.children[0].classList.add('bg-white');
       results.children[0].classList.add('p-3');
       results.children[0].classList.add('results-bar');
-      step2.outerHTML = results.innerHTML;
+      submitAction.remove();
+      step2.classList.add('visually-hidden');
+      step3.outerHTML = results.innerHTML;
       surveyForm.classList.add('visually-hidden');
       background.classList.add('visually-hidden');
     }
+/*
   });
 }
+*/

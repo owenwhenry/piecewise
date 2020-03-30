@@ -13,34 +13,28 @@ const GEO_TIMEOUT = 5000;
 if (!!consentForm) {
   consentForm.addEventListener('submit', checkLocationConsent);
 }
+let formData;
+let url;
 
 if (!!surveyForm) {
+  url = $('#SurveyForm').attr('action');
+
   surveyForm.addEventListener('submit', submitExtraData)
 }
 
 let obj = localStorage.getItem('formData');
 
-// console.log('retrievedObject: ', JSON.parse(obj));
-
-
 function submitExtraData(event) {
   event.preventDefault();
 
-  let formData = $('#SurveyForm').serialize();
-
-  // if (localStorage.getItem('formData')) {
-  //   formData = Object.assign(formData, localStorage.getItem('formData'))
-  // } else {
-  //   localStorage.setItem('formData', JSON.stringify(formData));
-  // }
+  formData = $('#SurveyForm').serialize();
 
   $.ajax({
     method: 'POST',
-    url: $('#SurveyForm').attr('action'),
+    url: url,
     data: formData,
     statusCode: {
       200: function(data) {
-        // localStorage.setItem('formData', JSON.stringify(data));
         console.log('Data submitted successfully: ', data);
       }
     },
@@ -91,7 +85,7 @@ function success(position) {
 
 	document.getElementById('latitude-mlab').value = position.coords.latitude;
 	document.getElementById('longitude-mlab').value = position.coords.longitude;
-  document.getElementById('latitude').value = position.coords.latitude;
+  	document.getElementById('latitude').value = position.coords.latitude;
 	document.getElementById('longitude').value = position.coords.longitude;
 
 	var xhr = new XMLHttpRequest(),
@@ -122,8 +116,8 @@ function error(error) {
 
 function getNdtServer() {
 	var xhr = new XMLHttpRequest(),
-		mlabNsUrl = 'https://mlab-ns.appspot.com/ndt_ssl?format=json';
-
+		mlabNsUrl = 'https://locate.measurementlab.net/ndt_ssl?format=json';
+			//&policy=geo_options
 	xhr.open('GET', mlabNsUrl, true);
 	xhr.send();
 	xhr.onreadystatechange = function () {
@@ -133,8 +127,8 @@ function getNdtServer() {
 				ndtServerIp = JSON.parse(xhr.responseText).ip;
 				console.log('Using M-Lab Server ' + ndtServer);
 			} else {
-				console.log('M-Lab NS lookup failed.');
-        window.alert('M-Lab NS lookup failed. Please refresh the page.')
+				console.log('M-Lab Server Lookup Failed.');
+        window.alert('M-Lab Server Lookup Failed. Please refresh the page.')
 			}
 		}
 	};

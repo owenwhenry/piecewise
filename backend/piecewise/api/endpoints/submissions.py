@@ -43,12 +43,13 @@ def submit(
     survey_subscribe_upload: str = Form(None),
     survey_bundle: str = Form(None),
     survey_current_cost: str = Form(None),
+    survey_partner_org: str = Form(None),
     actual_download: float = Form(None),
     actual_upload: float = Form(None),
     min_rtt: float = Form(None),
     latitude: float = Form(None),
     longitude: float = Form(None),
-    bigquery_key: str = Form(None)
+    bigquery_key: str = Form(None),
 ):
     if id:  # if data stored in dom
         """
@@ -68,6 +69,7 @@ def submit(
             survey_subscribe_upload=survey_subscribe_upload,
             survey_bundle=survey_bundle,
             survey_current_cost=survey_current_cost,
+            survey_partner_org=survey_partner_org,
             actual_download=actual_download,
             actual_upload=actual_upload,
             min_rtt=min_rtt,
@@ -81,6 +83,10 @@ def submit(
         """
         Create new item.
         """
+
+        if survey_applications is None:
+            survey_applications = 'none'
+
         sub_in = SubmissionCreate(
             db=db,
             survey_current_location=survey_current_location,
@@ -94,6 +100,7 @@ def submit(
             survey_subscribe_upload=survey_subscribe_upload,
             survey_bundle=survey_bundle,
             survey_current_cost=survey_current_cost,
+            survey_partner_org=survey_partner_org,
             actual_download=actual_download,
             actual_upload=actual_upload,
             min_rtt=min_rtt,

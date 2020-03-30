@@ -43,6 +43,7 @@ def upgrade():
     sa.Column('survey_subscribe_upload', sa.String(), nullable=True),
     sa.Column('survey_bundle', sa.String(), nullable=True),
     sa.Column('survey_current_cost', sa.String(), nullable=True),
+    sa.Column('survey_partner_org', sa.String(), nullable=True),
     sa.Column('actual_download', sa.Numeric(), nullable=True),
     sa.Column('actual_upload', sa.Numeric(), nullable=True),
     sa.Column('min_rtt', sa.Numeric(), nullable=True),

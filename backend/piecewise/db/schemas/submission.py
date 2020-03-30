@@ -14,13 +14,14 @@ class SubmissionBase(BaseModel):
     survey_subscribe_upload: Optional[str]
     survey_bundle: Optional[str]
     survey_current_cost: Optional[str]
+    survey_partner_org: Optional[str]
     actual_download: float
     actual_upload: float
     min_rtt: float
     latitude: Optional[float]
     longitude: Optional[float]
     bigquery_key: Optional[str]
-
+    
 
 class SubmissionCreate(SubmissionBase):
     pass
